@@ -18,9 +18,13 @@ FULL_TO=`python -c 'import json, os; print json.loads(os.environ["BUILD"])["spec
 _ "Pulling tested image (${FULL_FROM})"
 docker pull ${FULL_FROM}
 
-_ "Runningn test scripts"
+_ "Running test scripts"
 docker run --rm ${FULL_FROM} /bin/bash /usr/bin/test_script
 
+if [ $? -ne 0 ]; then
+  _ "Tests failed for ${FULL_FROM}"
+  exit 1
+fi
 
 _ "Re-tagging tested image (${FULL_FROM} -> ${TO})"
 docker tag ${FULL_FROM} ${FULL_TO}
