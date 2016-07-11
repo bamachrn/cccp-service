@@ -159,6 +159,7 @@ class IndexVerifier:
 
                     if not NutsAndBolts.StaticHandler.is_valid_git_url(value):
                         self._logger.log(NutsAndBolts.Logger.error, "Invalid git url format specified")
+                        success = False
 
                 # Check git-path
                 self._logger.log(NutsAndBolts.Logger.info, "Checking the git-path field")
