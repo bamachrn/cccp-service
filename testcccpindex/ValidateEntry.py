@@ -57,6 +57,7 @@ class ValidateEntry:
                 "test-skip": False,
                 "test-script": False,
                 "build-script": False,
+                "target-file": False,
                 "allpass": False
             }
         }
@@ -223,6 +224,29 @@ class ValidateEntry:
             self._logger.log(Logger.success, "Test skip not found, assuming True and moving on...")
             self._testData["tests"]["test-skip"] = True
 
+        self._logger.log(Logger.info, "Checking for target file")
+
+        # * Check for target-file
+        if "target-file" in cccpyaml.keys():
+
+            targetfile = cccpyaml["target-file"]
+            targetfilepath = self._cccp_test_dir + targetfile
+
+            if not os.path.exists(targetfilepath):
+
+                self._logger.log(Logger.error, "Target file does not exist, skipping")
+                return
+
+            else:
+
+                self._logger.log(Logger.success, "Target file found, moving on")
+                self._testData["target-file"] = True
+
+        else:
+
+            self._logger.log(Logger.success, "Target file not specified, assuming defaults and moving on")
+            self._testData["target-file"] = True
+
         # * Check for Test script
         if "test-script" in cccpyaml.keys():
 
@@ -269,7 +293,7 @@ class ValidateEntry:
                                                  self._testData["tests"]["test-skip"] and
                                                  self._testData["tests"]["test-script"]
                                              ) and \
-                                             self._testData["tests"]["build-script"]
+                                             self._testData["tests"]["build-script"] and self._testData["target-file"]
 
         return
 
