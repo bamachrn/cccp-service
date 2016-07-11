@@ -99,7 +99,7 @@ class ValidateEntry:
         cmd = ["git", "pull", "--all"]
         call(cmd)
 
-        cmd = ["git", "checkout", "origin/" + self._gitBranch]
+        cmd = ["git", "checkout", "origin", self._gitBranch]
         call(cmd)
 
         os.chdir(currdir)
