@@ -97,6 +97,14 @@ class StaticHandler:
 
                 Logger().log(Logger.error, "Non existant custom index specified, falling back to index git.")
 
+        cmd = "unset GIT_ASKPASS"
+
+        os.system(cmd)
+
+        cmd = "unset SSH_ASKPASS"
+
+        os.system(cmd)
+
         StaticHandler._setupFS()
 
         return
