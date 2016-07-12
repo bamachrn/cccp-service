@@ -15,9 +15,13 @@ function jumpto
 _ "Cloning the source repository..."
 git clone $SOURCE_REPOSITORY_URL||jumpto sendstatusmail
 
+
 dirname=${SOURCE_REPOSITORY_URL##*/}
 _ "Entering directory ${dirname##*/}"
 cd ${dirname##*/}
+
+_ "Changing repo branch ${REPO_BRANCH}"
+git checkout $REPO_BRANCH||jumpto sendstatusmail
 
 buildpath=${REPO_BUILD_PATH##/}
 if [ "$buildpath" == "" ]; then
