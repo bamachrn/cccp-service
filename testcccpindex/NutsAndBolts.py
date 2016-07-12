@@ -97,13 +97,10 @@ class StaticHandler:
 
                 Logger().log(Logger.error, "Non existant custom index specified, falling back to index git.")
 
-        cmd = "unset GIT_ASKPASS"
+        Globals.Globals.oldenviron = dict(os.environ)
 
-        os.system(cmd)
-
-        cmd = "unset SSH_ASKPASS"
-
-        os.system(cmd)
+        os.unsetenv("GIT_ASKPASS")
+        os.unsetenv("SSH_ASKPASS")
 
         StaticHandler._setupFS()
 
@@ -132,6 +129,13 @@ class StaticHandler:
             for item in content:
                 
                 os.remove(item)
+
+        return
+
+    @staticmethod
+    def cleanup():
+
+        os.environ.update(Globals.Globals.oldenviron)
 
         return
 
