@@ -52,6 +52,9 @@ class Engine:
 
             success = pass1
 
+        Logger().log(Logger.info, "Cleaning up systems")
+        StaticHandler.cleanup()
+
         Logger().log(Logger.info, "Operations completed, check the dump directory for more information.")
 
         return success
