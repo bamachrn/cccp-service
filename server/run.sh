@@ -41,9 +41,9 @@ _ "Copying index reader to docker file"
 cp /cccp_reader.py .
 
 _ "Adding index reader to docker file"
-echo "ADD cccp_reader.py /set_env/" >> $TARGET_FILE
-echo "ADD cccp.yml /set_env/" >> $TARGET_FILE
-echo "RUN yum install --disablerepo=* --enablerepo=base -y PyYAML libyaml && python /set_env/cccp_reader.py" >> $TARGET_FILE
+#echo "ADD cccp_reader.py /set_env/" >> $TARGET_FILE
+#echo "ADD cccp.yml /set_env/" >> $TARGET_FILE
+#echo "RUN yum install --disablerepo=* --enablerepo=base -y PyYAML libyaml && python /set_env/cccp_reader.py" >> $TARGET_FILE
 
 _ "Building the image in ${buildpath} with tag ${TAG}"
 docker build --rm --no-cache -t $TAG -f $TARGET_FILE . || jumpto sendstatusmail
