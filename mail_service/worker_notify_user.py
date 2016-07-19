@@ -6,7 +6,7 @@ import subprocess
 import re
 import time
 
-bs = beanstalkc.Connection(host="172.20.1.32")
+bs = beanstalkc.Connection(host="172.17.0.1")
 bs.watch("notify_user")
 
 while True:
