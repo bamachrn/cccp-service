@@ -17,9 +17,11 @@ class Globals:
     previousIndexGitFile = ""
 
     buildinfo = ""
+    oldenviron = None
 
     @staticmethod
     def setdatadirectory(value):
+
         if not os.path.isabs(value):
             value = os.path.abspath(value)
 
